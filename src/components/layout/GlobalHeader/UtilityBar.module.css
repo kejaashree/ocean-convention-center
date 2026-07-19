@@ -1,0 +1,38 @@
+.utilityBar {
+  background-color: var(--color-venue-navy);
+  color: var(--color-text-inverse);
+  height: var(--utility-bar-height);
+  display: flex;
+  align-items: center;
+}
+
+.utilityBarInner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  font-size: 0.8125rem;
+}
+
+.utilityBarInner a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.utilityBarInner a:hover {
+  text-decoration: underline;
+}
+
+.utilityDivider {
+  opacity: 0.4;
+}
+
+@media (max-width: 1023px) {
+  .utilityBar {
+    display: none;
+  }
+}

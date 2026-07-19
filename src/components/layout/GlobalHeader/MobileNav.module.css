@@ -1,0 +1,105 @@
+.mobileNav {
+  position: fixed;
+  inset: 0;
+  top: var(--header-height-scrolled);
+  z-index: var(--z-mobile-nav);
+  background-color: var(--color-bg-primary);
+  padding: var(--space-md) var(--container-padding-inline) var(--space-lg);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.mobileNavOpen {
+  transform: translateX(0);
+}
+
+.mobileNavList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileNavItem {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.mobileNavLink,
+.mobileNavSectionToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-sm) 0;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.mobileNavLink:focus-visible,
+.mobileNavSectionToggle:focus-visible,
+.mobileSubNavLink:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.chevron {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--color-text-primary);
+  border-bottom: 2px solid var(--color-text-primary);
+  transform: rotate(45deg);
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.chevronOpen {
+  transform: rotate(225deg);
+}
+
+.mobileSubNavList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-base) var(--ease-standard);
+}
+
+.mobileSubNavListOpen {
+  max-height: 400px;
+}
+
+.mobileSubNavLink {
+  display: block;
+  padding: var(--space-xs) 0 var(--space-xs) var(--space-md);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+
+.mobileCta {
+  display: block;
+  text-align: center;
+  margin-top: var(--space-lg);
+  padding: 0.9rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-cta-bg);
+  color: var(--color-cta-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (min-width: 1024px) {
+  .mobileNav {
+    display: none;
+  }
+}

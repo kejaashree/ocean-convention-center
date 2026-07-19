@@ -1,0 +1,131 @@
+.eventTypes {
+  background-color: var(--color-bg-primary);
+  padding-block: var(--space-2xl);
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.heading {
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Card grid                                                           */
+/* ------------------------------------------------------------------ */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.card {
+  position: relative;
+  min-height: 140px;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-inverse);
+  /* Darkened from 0.72 to 0.82: a photographic texture's bright regions
+     (this carpet pattern has gold highlights, confirmed in the image
+     analysis) can't be guaranteed to stay under a lighter scrim. The
+     text-shadow below is a second, image-independent legibility
+     guarantee that doesn't depend on the scrim opacity alone. */
+  background-image: linear-gradient(rgba(20, 30, 54, 0.82), rgba(20, 30, 54, 0.82)),
+    url("/assets/images/textures/navy-gold-carpet-pattern.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+  transition-delay: calc(min(var(--stagger-index), 6) * 60ms);
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+    transition-delay: 0ms;
+  }
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.placeholderBadge {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-inverse);
+  background-color: rgba(30, 27, 24, 0.55);
+  border: 1px solid rgba(246, 241, 232, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.5rem;
+  margin-top: var(--space-xs);
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll-reveal — fade-up, same pattern as prior sections             */
+/* ------------------------------------------------------------------ */
+.revealable {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealable {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .eventTypes {
+    padding-block: var(--space-xl);
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .inner {
+    gap: var(--space-lg);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

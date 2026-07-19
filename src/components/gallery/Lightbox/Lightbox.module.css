@@ -1,0 +1,152 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-base) var(--ease-standard),
+    visibility var(--duration-base) var(--ease-standard);
+}
+
+.overlay.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay.noTransition {
+  transition: none;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background-color: rgba(30, 27, 24, 0.92);
+  cursor: zoom-out;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: min(1200px, 92vw);
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.image {
+  max-width: min(1200px, 92vw);
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--color-text-inverse);
+  opacity: 0.8;
+}
+
+.closeButton {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-pill);
+  background-color: rgba(246, 241, 232, 0.12);
+  color: var(--color-text-inverse);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.closeButton:hover {
+  background-color: rgba(246, 241, 232, 0.22);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-pill);
+  background-color: rgba(246, 241, 232, 0.12);
+  color: var(--color-text-inverse);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.navButton:hover {
+  background-color: rgba(246, 241, 232, 0.22);
+}
+
+.navButton:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.prevButton {
+  left: -64px;
+}
+
+.nextButton {
+  right: -64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    transition: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .prevButton {
+    left: var(--space-sm);
+  }
+
+  .nextButton {
+    right: var(--space-sm);
+  }
+
+  .closeButton {
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+}

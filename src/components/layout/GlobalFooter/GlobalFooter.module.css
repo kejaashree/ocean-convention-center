@@ -1,0 +1,287 @@
+.footer {
+  /* Reuses --color-venue-navy, the same dark surface already established
+     by UtilityBar — kept consistent with what's already shipped rather
+     than introducing a second dark-background color. Both this and
+     UtilityBar's usage will be reconciled together during the Brand
+     Reconciliation phase, once tokens.css is updated against the actual
+     brand guidelines (which specify Wet Earth, not this estimated navy,
+     for dark surfaces). */
+  background-color: var(--color-venue-navy);
+  color: var(--color-text-inverse);
+  padding-block: var(--space-xl) var(--space-lg);
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll-reveal — fade-up, same pattern as every page section         */
+/* ------------------------------------------------------------------ */
+.revealable {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealable {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Top row — brand column + sitemap columns                           */
+/* ------------------------------------------------------------------ */
+.topRow {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-xl);
+}
+
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 320px;
+}
+
+.logo {
+  display: inline-block;
+  margin: 0;
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.logoImage {
+  display: block;
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.legacyNote {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-inverse);
+  opacity: 0.7;
+  margin: 0;
+  font-style: italic;
+}
+
+.address {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: var(--lh-body);
+  color: var(--color-text-inverse);
+  opacity: 0.85;
+  font-style: normal;
+  margin: 0;
+}
+
+.columnsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnTitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-brand-beige);
+  margin: 0 0 var(--space-sm);
+}
+
+.columnLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.columnLink {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-inverse);
+  opacity: 0.85;
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.columnLink:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.columnLink:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ------------------------------------------------------------------ */
+/* Contact row                                                         */
+/* ------------------------------------------------------------------ */
+.contactRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding-block: var(--space-md);
+  border-block: 1px solid rgba(246, 241, 232, 0.15);
+}
+
+.contactLink {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.contactLink:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.contactLink:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ------------------------------------------------------------------ */
+/* Bottom row — copyright + social                                    */
+/* ------------------------------------------------------------------ */
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.copyright {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-inverse);
+  opacity: 0.7;
+  margin: 0;
+}
+
+.socialRow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(246, 241, 232, 0.1);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.socialLink:hover {
+  background-color: rgba(246, 241, 232, 0.2);
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.socialIcon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-text-inverse);
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  opacity: 0.9;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.socialLink:hover .socialIcon,
+.socialLink:focus-visible .socialIcon {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .columnsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brandColumn {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .footer {
+    padding-block: var(--space-lg) var(--space-md);
+  }
+
+  .inner {
+    gap: var(--space-lg);
+  }
+
+  .columnsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .contactRow {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .bottomRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

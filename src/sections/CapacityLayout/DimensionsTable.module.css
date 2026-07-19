@@ -1,0 +1,77 @@
+.scrollWrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.scrollWrapper:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px; /* forces horizontal scroll on mobile rather than illegible compression */
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+}
+
+.caption {
+  /* Visually hidden but announced to screen readers — gives the table an
+     accessible name beyond the surrounding section heading. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.table thead th {
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-primary);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.table tbody th,
+.table tbody td {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.table tbody th {
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 639px) {
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .table thead th,
+  .table tbody th,
+  .table tbody td {
+    padding: var(--space-xs) var(--space-sm);
+  }
+}

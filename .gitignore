@@ -1,0 +1,16 @@
+<<<<<<< HEAD
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.local
+=======
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.local
+>>>>>>> ee0cf724ea4f0efb920bad0ce36a1821ecbd8bbf
+*.log

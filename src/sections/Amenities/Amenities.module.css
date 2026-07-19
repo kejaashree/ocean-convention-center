@@ -1,0 +1,158 @@
+.amenities {
+  background-color: var(--color-bg-primary);
+  padding-block: var(--space-2xl);
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.heading {
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Amenity grid                                                        */
+/* ------------------------------------------------------------------ */
+.amenityGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+li.amenityCard {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+  transition-delay: calc(min(var(--stagger-index), 6) * 60ms);
+}
+
+.amenityCardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  li.amenityCard {
+    transition: none;
+    transition-delay: 0ms;
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-brand-brown);
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  border-radius: 0;
+  opacity: 0.85;
+}
+
+.amenityContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.amenityLabel {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: var(--lh-tight);
+}
+
+.amenityDescription {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: var(--lh-body);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.placeholderBadge {
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  /* Was --color-venue-gold, which measured ~2.7:1 against this background —
+     well under WCAG AA's 4.5:1 minimum for text this size. --color-brand-brown
+     measures ~6.9:1 against the same background and passes AA. */
+  color: var(--color-brand-brown);
+  background-color: rgba(176, 141, 87, 0.14);
+  border: 1px solid rgba(176, 141, 87, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.5rem;
+  margin-top: var(--space-xs);
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll-reveal — fade-up, same pattern as prior sections             */
+/* ------------------------------------------------------------------ */
+.revealable {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealable {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .amenities {
+    padding-block: var(--space-xl);
+  }
+
+  .amenityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .inner {
+    gap: var(--space-lg);
+  }
+
+  .amenityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .amenityCard {
+    flex-direction: row;
+  }
+}

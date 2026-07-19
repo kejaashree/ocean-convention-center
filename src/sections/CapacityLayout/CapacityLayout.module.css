@@ -1,0 +1,77 @@
+.capacityLayout {
+  background-color: var(--color-bg-primary);
+  padding-block: var(--space-2xl);
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.heading {
+  margin-inline: auto;
+}
+
+.subheading {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-brand-brown);
+  margin: 0 0 var(--space-sm);
+}
+
+.tableWrapper,
+.seatingWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll-reveal — fade-up, same pattern as AboutVenue                 */
+/* ------------------------------------------------------------------ */
+.revealable {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tableWrapper.revealable {
+  transition-delay: 100ms;
+}
+
+.seatingWrapper.revealable {
+  transition-delay: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealable {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .capacityLayout {
+    padding-block: var(--space-xl);
+  }
+}
+
+@media (max-width: 639px) {
+  .inner {
+    gap: var(--space-lg);
+  }
+}

@@ -1,0 +1,83 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
+
+/* Visible focus state — required per the accessibility checklist.
+   Do not remove without replacing; this is intentional, not a leftover default. */
+.button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+.primary {
+  background-color: var(--color-cta-bg);
+  color: var(--color-cta-text);
+  border-color: var(--color-cta-bg);
+}
+
+.primary:hover {
+  background-color: var(--color-cta-bg-hover);
+  border-color: var(--color-cta-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lifted);
+}
+
+.primary:active {
+  transform: scale(0.98) translateY(0);
+  box-shadow: none;
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--color-text-inverse);
+  border-color: currentColor;
+}
+
+.secondary:hover {
+  background-color: rgba(246, 241, 232, 0.12);
+  transform: translateY(-1px);
+}
+
+/* When the secondary button is used on a light background (not over the
+   hero image), consumers can pass this modifier via className. */
+.secondaryOnLight {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 639px) {
+  .button {
+    width: 100%;
+  }
+}

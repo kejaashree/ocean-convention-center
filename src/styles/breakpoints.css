@@ -1,0 +1,22 @@
+/**
+ * breakpoints.css
+ * Values are ESTIMATED from the live site's dual-markup (desktop nav /
+ * mobile accordion nav) behavior — exact pixel values were not directly
+ * confirmable. These are standard, safe defaults; adjust in this single
+ * file if the client's real CSS specifies different values.
+ *
+ * CSS custom properties can't be used inside @media queries directly,
+ * so these are documented here and mirrored in useMediaQuery.ts (JS) and
+ * as literal values in each component's media queries. Keep all three in
+ * sync if these ever change.
+ *
+ *   mobile:  0    – 639px
+ *   tablet:  640  – 1023px
+ *   desktop: 1024px+
+ */
+
+:root {
+  --bp-tablet: 640px;
+  --bp-desktop: 1024px;
+  --bp-wide: 1440px;
+}

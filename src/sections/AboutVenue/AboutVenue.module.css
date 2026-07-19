@@ -1,0 +1,118 @@
+.aboutVenue {
+  background-color: var(--color-bg-primary);
+  padding-block: var(--space-2xl);
+}
+
+.inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-inline);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.imageColumn {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  /* Premium "unveil" treatment: the image itself settles from a gentle
+     zoom as the section reveals, layered on top of (not replacing) the
+     existing opacity/translateY fade on .imageColumn. A longer, slower
+     transition than the standard reveal — this is meant to read as a
+     deliberate, unhurried unveiling, not a quick pop-in. */
+  transform: scale(1.08);
+  transition: transform 1.1s var(--ease-standard);
+}
+
+.imageColumn.revealed .image {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+    transform: scale(1);
+  }
+}
+
+.copyColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heading {
+  margin-bottom: var(--space-md);
+}
+
+.bodyText {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 56ch;
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll-reveal — fade-up, per the animation plan                     */
+/* ------------------------------------------------------------------ */
+.revealable {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger the copy column slightly behind the image, a subtle two-step
+   reveal rather than both columns animating in perfect lockstep. */
+.copyColumn.revealable {
+  transition-delay: 120ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealable {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1023px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .aboutVenue {
+    padding-block: var(--space-xl);
+  }
+}
+
+@media (max-width: 639px) {
+  .image {
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-md);
+  }
+
+  .bodyText {
+    font-size: var(--fs-body);
+  }
+}

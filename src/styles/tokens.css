@@ -1,0 +1,218 @@
+/**
+ * tokens.css
+ * Single source of truth for all design tokens on the Aldovia site.
+ *
+ * BRAND RECONCILIATION PASS — updated against grand_guidelines.md (the
+ * official Aldovia brand guidelines). Every value below is now sourced
+ * from that document rather than estimated from the live-site audit.
+ * Annotation convention matches the guidelines document's own:
+ *   [E] = extracted directly from the brand guidelines
+ *   [I] = inferred/engineered, since the guidelines are print/campaign-
+ *         focused and don't specify a literal web value for this token
+ *
+ * SCOPE OF THIS PASS: token VALUES only. Every token NAME below that
+ * existed before this pass has been preserved even where no longer an
+ * ideal name (see --color-venue-navy, --color-venue-gold) specifically
+ * because renaming would require touching the component files that
+ * reference them, which is out of scope for a tokens-only reconciliation.
+ * Renaming/removing those is a follow-up component-level task, not done
+ * here.
+ */
+
+:root {
+  /* ------------------------------------------------------------------ */
+  /* COLOR — brand's 5-color system [E], everything else derived [I]     */
+  /* ------------------------------------------------------------------ */
+
+  /* The two brand primaries, verbatim [E] */
+  --color-wet-earth: #49261c;
+  --color-first-light: #fbf6e6;
+
+  /* The three brand accents, verbatim [E] */
+  --color-beeswax: #ffe9a1;
+  --color-jacaranda: #b397c7;
+  --color-aqua: #a5d9cb;
+
+  --color-bg-primary: var(--color-first-light); /* [E] default page background */
+  /* Not explicitly specified — brand says cards are "flat, minimal-shadow
+     surfaces on First Light background". White is a conservative,
+     brand-non-contradicting choice for subtle separation from the cream
+     page background. [I] */
+  --color-bg-card: #ffffff;
+
+  --color-text-primary: var(--color-wet-earth); /* [E] "primary text on light surfaces" */
+  --color-text-inverse: var(--color-first-light); /* [E] "reversed text on dark backgrounds" */
+  /* Muted text has no direct brand definition — derived as Wet Earth
+     blended toward First Light (~55/45), staying strictly in-family
+     rather than introducing a neutral gray outside the 5-color palette. [I] */
+  --color-text-muted: #998477;
+
+  /* --color-brand-beige powers accent labels on DARK backgrounds
+     (EyebrowLabel onDark, StatBlock onDark, footer column titles) — this
+     is exactly the brand's stated role for Beeswax: "highlight blocks,
+     tags, decorative accents". [E] */
+  --color-brand-beige: var(--color-beeswax);
+
+  /* --color-brand-brown powers accent/hover states on LIGHT backgrounds
+     (nav hover, icon placeholders, badge text/icons). The brand has only
+     one dark primary (Wet Earth) and no secondary brown — rather than
+     reuse the exact same value as --color-text-primary (which would make
+     hover states visually indistinguishable from static body text), this
+     is Wet Earth blended ~25% toward First Light, the same
+     tint-derivation approach the guidelines document itself uses for
+     --color-border. Stays strictly in-family. [I] */
+  --color-brand-brown: #765a4f;
+
+  /* --color-venue-navy has no equivalent in the actual brand palette —
+     it was an estimated color invented before the brand guidelines were
+     available (still referenced by UtilityBar.module.css and
+     GlobalFooter.module.css for their dark-surface backgrounds). Brand's
+     rule for dark sections is Wet Earth, so this is now a direct alias
+     rather than an independent color. Candidate for renaming to something
+     semantic (e.g. --color-bg-dark) in a future component-level pass —
+     not renamed here since that touches component files. [E, via alias] */
+  --color-venue-navy: var(--color-wet-earth);
+
+  /* --color-venue-gold is currently unreferenced by any component (dead
+     token) — repointed to Beeswax for correctness if it's ever picked
+     back up, rather than left pointing at an invented hex with no brand
+     basis. [E, via alias] */
+  --color-venue-gold: var(--color-beeswax);
+
+  /* Primary CTA fill: brand specifies "solid Wet Earth or Beeswax fill,
+     First Light or Wet Earth text". Wet Earth chosen for the solid fill,
+     consistent with the header/footer's existing dark-surface language. [E] */
+  --color-cta-bg: var(--color-wet-earth);
+  /* Hover state has no direct brand definition — Wet Earth darkened
+     ~15%, staying in-family rather than introducing a new hue. [I] */
+  --color-cta-bg-hover: #3e2018;
+  --color-cta-text: var(--color-first-light); /* [E] Wet Earth bg -> First Light text pairing rule */
+
+  /* Wet Earth at ~15% opacity — this is not derived independently; it's
+     the guidelines document's own literal inferred token
+     (--color-border: #49261C26 in Section 10), copied verbatim. [E, via alias] */
+  --color-border-subtle: #49261c26;
+
+  /* Brand's explicit rule: "focus state using an accent color (Aqua or
+     Jacaranda) rather than a generic blue." Pure Aqua (#A5D9CB) measured
+     1.57:1 against this project's light card/page surfaces — well under
+     WCAG 1.4.11's 3:1 minimum for non-text UI indicators — since every
+     focus ring sitewide references this one token, that's a real,
+     wide-reaching defect, not a one-off. Darkened in-family (same hue,
+     same "Aqua" identity) to a value that verified at 3.0-3.25:1 against
+     this project's light surfaces and 4.1:1 against the dark ones,
+     rather than switching to an unrelated color. This mirrors the same
+     "extend the palette responsibly, stay in-family" approach the
+     guidelines document itself uses for --color-error. [I, derived from E] */
+  --color-focus-ring: #4f9c8c;
+
+  /* ------------------------------------------------------------------ */
+  /* TYPOGRAPHY                                                          */
+  /* ------------------------------------------------------------------ */
+  /* [E] Licensed via Adobe Fonts. RESOLVED (was previously flagged as
+     pending): Adobe Fonts requires a paid kit ID this project doesn't
+     have, so "Lust Text" / "Area Normal" alone were silently resolving
+     to Georgia / system-ui with nothing in between — a visible
+     design-fidelity gap. --font-display-fallback / --font-body-fallback
+     are now self-hosted via next/font (see pages/_app.tsx) as a close,
+     freely-licensed stand-in tier. To activate the real brand fonts:
+     add the Adobe Fonts kit <link> in pages/_document.tsx — no change
+     needed here, "Lust Text"/"Area Normal" already lead the stack and
+     will take over automatically the moment the kit loads. */
+  --font-display: "Lust Text", var(--font-display-fallback), Georgia, "Times New Roman", serif;
+  --font-body: "Area Normal", var(--font-body-fallback), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --tracking-eyebrow: 0.075em; /* [E] brand's literal "+75" tracking value */
+
+  /* Brand's own Form styles example sets labels to Footnote scale
+     (13px) — our --fs-eyebrow token already covers exactly that role
+     (FormField labels, EyebrowLabel, badges), so it maps directly. [E] */
+  --fs-eyebrow: 0.8125rem;
+  --fs-body: 1.125rem; /* [E] brand's literal Body size, 18px */
+  /* No distinct "large body" size in the brand scale — inferred as a
+     modest step up from Body, not a new hierarchy level. [I] */
+  --fs-body-lg: 1.25rem;
+  /* Brand defines only two heading levels (H1/H2); our SectionHeading
+     component supports an optional third level for content nested
+     inside a section. Sized as an inferred intermediate step between H2
+     and Body, since the brand doesn't define one — not a brand value. [I] */
+  --fs-h3: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  --fs-h2: clamp(1.75rem, 1.4rem + 2.5vw, 3.75rem); /* [E] brand's literal Heading 02, 75-80% of H1 */
+  --fs-h1: clamp(2.5rem, 1.6rem + 4.5vw, 5rem); /* [E] brand's literal Heading 01 */
+
+  --lh-tight: 1.0; /* [E] brand's literal heading line-height, "100%" */
+  --lh-body: 1.5; /* [E] brand's literal body/CTA/footnote line-height, "150%" */
+
+  /* ------------------------------------------------------------------ */
+  /* SPACING                                                             */
+  /* ------------------------------------------------------------------ */
+  /* xs/sm/md/lg already matched the brand's own [I] inferred spacing
+     scale (Section 10) by coincidence — 8/16/24/48px. xl and 2xl are
+     updated here to align with the brand's literal 64px / 96px values,
+     where they previously didn't match. */
+  --space-xs: 0.5rem; /* 8px [E, matches brand's --space-1] */
+  --space-sm: 1rem; /* 16px [E, matches brand's --space-2] */
+  --space-md: 1.5rem; /* 24px [E, matches brand's --space-3] */
+  --space-lg: 3rem; /* 48px [E, matches brand's --space-5] */
+  --space-xl: 4rem; /* 64px [E, matches brand's --space-6] — was 5rem/80px */
+  --space-2xl: 6rem; /* 96px [E, matches brand's --space-7] — was 7.5rem/120px */
+
+  /* ------------------------------------------------------------------ */
+  /* RADIUS                                                               */
+  /* ------------------------------------------------------------------ */
+  --radius-sm: 4px; /* [E] matches brand's literal value exactly */
+  --radius-md: 8px; /* [E] matches brand's literal value exactly */
+  /* Brand's inferred direction caps soft corners at "4-10px"; previous
+     16px exceeded that range. Set to the top of the brand's stated band. */
+  --radius-lg: 10px; /* [I], reduced from 16px to stay within brand's 4-10px guidance */
+  --radius-pill: 100px; /* [E] matches brand's literal value exactly — was 999px, functionally identical at normal button heights */
+
+  /* ------------------------------------------------------------------ */
+  /* SHADOW                                                               */
+  /* ------------------------------------------------------------------ */
+  /* Brand's stated default is flat/no shadow, with --shadow-soft
+     reserved "only for elevated cards/modals". Card.tsx's *default*
+     variant currently applies a shadow to every standard card, not only
+     elevated ones — that's a component-logic decision (which variant is
+     the default) and is intentionally NOT changed in this tokens-only
+     pass. What IS changed here: the shadow itself is now much softer and
+     color-matched to Wet Earth rather than near-black, using the
+     guidelines' own literal --shadow-soft value. Revisiting Card's
+     default variant is flagged for the upcoming component-level visual
+     QA pass, not resolved here. */
+  --shadow-card: 0 12px 30px rgba(73, 38, 28, 0.08); /* [E] brand's literal --shadow-soft value */
+  --shadow-header: 0 2px 16px rgba(73, 38, 28, 0.06); /* [I], color-matched to Wet Earth, spread/blur unchanged */
+  --shadow-lifted: 0 12px 32px rgba(73, 38, 28, 0.14); /* [I], color-matched to Wet Earth, spread/blur unchanged */
+
+  /* ------------------------------------------------------------------ */
+  /* MOTION — unchanged, brand specifies no literal values here beyond    */
+  /* "slow, subtle fades/reveals" — already the project's existing       */
+  /* animation posture (useScrollReveal, useCountUp), not touched.       */
+  /* ------------------------------------------------------------------ */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+
+  /* ------------------------------------------------------------------ */
+  /* LAYOUT                                                               */
+  /* ------------------------------------------------------------------ */
+  --container-max: 1440px;
+  /* Brand's literal margin rule: 100-120px desktop minimum (110px
+     midpoint used), 24px mobile fallback [I, brand doesn't define a
+     mobile value] — both now sourced from the guidelines' own Section 10
+     tokens (--margin-digital, --margin-digital-mobile) instead of the
+     previous unrelated estimated clamp. */
+  --container-padding-inline: clamp(1.5rem, 6vw, 6.875rem); /* [E via alias] 24px -> 110px */
+
+  --header-height: 88px;
+  --header-height-scrolled: 72px;
+  --utility-bar-height: 40px;
+
+  /* ------------------------------------------------------------------ */
+  /* Z-INDEX SCALE — centralized to prevent stacking-context guesswork   */
+  /* ------------------------------------------------------------------ */
+  --z-header: 100;
+  --z-mobile-nav: 200;
+  --z-lightbox: 300;
+}
